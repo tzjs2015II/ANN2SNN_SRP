@@ -61,7 +61,8 @@ if __name__ == '__main__':
     
     
     if args.net_arch == 'resnet20':
-        model = resnet20(num_classes=cls)
+        model = resnet
+        20(num_classes=cls)
     elif args.net_arch == 'resnet18':
         model = resnet18(num_classes=cls)
     elif args.net_arch == 'resnet34':

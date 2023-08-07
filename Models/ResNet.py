@@ -155,9 +155,13 @@ class ResNetplus(nn.Module):
 class ResNet4Cifar(nn.Module):
     def __init__(self, block, num_block, num_classes=10):
         super().__init__()
+        #todo 输入通道？
         self.in_channels = 16
+        # 
         self.conv1 = nn.Sequential(
+            # 卷积
             nn.Conv2d(3, 16, kernel_size=3, padding=1, bias=False),
+            # 批归一化
             nn.BatchNorm2d(16),
             nn.ReLU(inplace=True)
             )
@@ -168,12 +172,14 @@ class ResNet4Cifar(nn.Module):
         self.conv4_x = self._make_layer(block, 64, num_block[2], 2)
         self.avg_pool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(64 * block.expansion, num_classes)
-
+    
+    # 残差层计算与构建
     def _make_layer(self, block, out_channels, num_blocks, stride):
         strides = [stride] + [1] * (num_blocks - 1)
         layers = []
         for stride in strides:
             layers.append(block(self.in_channels, out_channels, stride))
+            # 确保下一个残差块的输入通道数与当前输出通道数相匹配
             self.in_channels = out_channels * block.expansion
         return nn.Sequential(*layers)
 
