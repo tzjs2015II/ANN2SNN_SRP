@@ -52,7 +52,7 @@ class VGG(nn.Module):
                 nn.ReLU(inplace=True),
                 nn.Dropout(dropout),
                 nn.Linear(4096, num_classes)
-            )         
+            )
         else:
             self.classifier = nn.Sequential(
                 nn.Flatten(),
@@ -73,6 +73,7 @@ class VGG(nn.Module):
                 nn.init.zeros_(m.bias)
             elif isinstance(m, nn.Linear):
                 nn.init.zeros_(m.bias)
+        print("遍历并重置完所有的权重分布了")
 
     def _make_layers(self, cfg, dropout):
         layers = []
@@ -115,12 +116,14 @@ class VGG_nobias(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(4096, num_classes, bias=False)
         )
+        # 在__init__阶段
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
             elif isinstance(m, nn.BatchNorm2d):
                 nn.init.constant_(m.weight, val=1)
-
+    print("重复断点")
+    
     def _make_layers(self, cfg, dropout):
         layers = []
         for x in cfg:

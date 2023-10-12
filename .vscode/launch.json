@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            // 训练用
+            // "args": [
+            //     "--dataset","CIFAR10",
+            //     "--datadir","/mnt/e/Data/DataSet/cifar-10-python/cifar-10-batches-py/",
+            //     "--savedir","/mnt/e/Data/Github/ANN2SNN_SRP/output/",
+            //     "--net_arch","vgg16",
+            //     "--presim_len","4",
+            //     "--sim_len","32",
+            //     "--CUDA_VISIBLE_DEVICES","0",
+            //     "--batchsize","128",
+            //     "--direct_training",
+            //     "--trainann_epochs","300"
+            // ]
+
+            // 转换用
+            "args": [
+                "--dataset","CIFAR10",
+                "--datadir","/mnt/e/Data/DataSet/cifar-10-python/cifar-10-batches-py/",
+                "--load_model_name","/mnt/e/Data/Github/ANN2SNN_SRP/output/outputQCFS_CIFAR10_vgg16_L4",
+                "--net_arch","vgg16",
+                "--presim_len","4",
+                "--sim_len","32",
+                "--CUDA_VISIBLE_DEVICES","0"
+            ]
+        }
+    ]
+}
